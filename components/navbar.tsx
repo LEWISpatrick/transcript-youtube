@@ -7,16 +7,8 @@ import { Logo } from '@/components/logo'
 
 export const navPages = [
   {
-    title: 'Dashboard',
-    link: '/dashboard'
-  },
-  {
-    title: 'Pricing',
-    link: '/#pricing'
-  },
-  {
-    title: 'Items',
-    link: '/#items'
+    title: 'Transcript-Youtube-Video',
+    link: '/yt-transcript'
   }
 ]
 

@@ -11,8 +11,8 @@ import { AlertDemo } from '@/components/alert'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Nizzy-Starter',
-  description: 'The best SaaS starter kit on the web 🌎 🚀 HAHA'
+  title: 'Script-youtube',
+  description: 'Use AI to write your youtube Script 💻👀 - 🫢'
 }
 
 export default async function RootLayout({

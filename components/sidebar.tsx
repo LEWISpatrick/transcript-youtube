@@ -8,43 +8,19 @@ import { Logo } from '@/components/logo'
 
 const sidebarPages = [
   {
-    link: '/',
-    title: 'Home'
-  },
-  {
-    link: '#profile',
-    title: 'Profile'
-  },
-  {
-    link: '#purchases',
-    title: 'Purchases'
+    title: 'Transcript-youtube-Video',
+    link: '/yt-transcript'
   }
 ]
 
 const socials = [
   {
-    link: 'https://github.com/NizarAbiZaher',
+    link: 'https://github.com/LEWISpatrick',
     title: 'Github'
   },
   {
-    link: 'https://www.youtube.com/@NizzyABI',
+    link: 'https://www.youtube.com/@PatrickHenry69420/videos',
     title: 'Youtube'
-  },
-  {
-    link: 'https://twitter.com/NizarAbiZaher',
-    title: 'Twitter'
-  },
-  {
-    link: 'https://www.linkedin.com/in/nizarabizaher/',
-    title: 'Tiktok'
-  },
-  {
-    link: 'https://www.instagram.com/nizarabizaher/',
-    title: 'Instagram'
-  },
-  {
-    link: 'https://discord.gg/nizar',
-    title: 'Discord'
   }
 ]
 
