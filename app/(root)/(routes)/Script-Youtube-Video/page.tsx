@@ -238,6 +238,64 @@ const TranscriptPage = () => {
     }
   }
 
+  const handleSaveOutline = async () => {
+    if (!selectedTitle || !selectedTitle.outline) {
+      toast.error('Please generate an outline first')
+      return
+    }
+
+    try {
+      const response = await fetch('/api/create-outline', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: selectedTitle.title,
+          content: selectedTitle.outline
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to save outline')
+      }
+
+      toast.success('Outline saved successfully')
+    } catch (error) {
+      console.error('Error saving outline:', error)
+      toast.error('Failed to save outline')
+    }
+  }
+
+  const handleSaveFullScript = async () => {
+    if (!selectedTitle || !selectedTitle.script) {
+      toast.error('Please generate a full script first')
+      return
+    }
+
+    try {
+      const response = await fetch('/api/create-script', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: selectedTitle.title,
+          content: selectedTitle.script
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to save full script')
+      }
+
+      toast.success('Full script saved successfully')
+    } catch (error) {
+      console.error('Error saving full script:', error)
+      toast.error('Failed to save full script')
+    }
+  }
+
   useEffect(() => {
     fetchSavedNiches()
   }, [])
@@ -344,7 +402,7 @@ const TranscriptPage = () => {
                 className="w-full px-4 py-3 text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 mb-4"
                 rows={8}
               />
-              <div className="flex justify-center mb-4">
+              <div className="flex justify-between mb-4">
                 <Button
                   onClick={handleGenerateScript}
                   disabled={isGeneratingScript}
@@ -355,16 +413,32 @@ const TranscriptPage = () => {
                     ? 'Generating...'
                     : 'Generate Full Script'}
                 </Button>
+                <Button
+                  onClick={handleSaveOutline}
+                  className="px-6 py-3 text-lg bg-green-500 hover:bg-green-600"
+                >
+                  <FaSave className="mr-2" /> Save Outline
+                </Button>
               </div>
             </>
           )}
           {selectedTitle.script && (
-            <textarea
-              value={selectedTitle.script}
-              onChange={handleScriptChange}
-              className="w-full px-4 py-3 text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 mb-4"
-              rows={12}
-            />
+            <>
+              <textarea
+                value={selectedTitle.script}
+                onChange={handleScriptChange}
+                className="w-full px-4 py-3 text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 mb-4"
+                rows={12}
+              />
+              <div className="flex justify-center mb-4">
+                <Button
+                  onClick={handleSaveFullScript}
+                  className="px-6 py-3 text-lg bg-green-500 hover:bg-green-600"
+                >
+                  <FaSave className="mr-2" /> Save Full Script
+                </Button>
+              </div>
+            </>
           )}
           <div className="flex justify-center">
             <Button
