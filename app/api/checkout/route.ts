@@ -26,7 +26,7 @@ export async function POST(req: Request) {
               name: 'One-Time Payment',
               description: 'Access to premium features'
             },
-            unit_amount: 2000 // $20.00
+            unit_amount: 500 // $5.00
           },
           quantity: 1
         }

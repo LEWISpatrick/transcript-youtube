@@ -53,18 +53,18 @@ export function AlertDemo() {
             Heads up!
           </AlertTitle>
           <AlertDescription className="flex">
-            <p>Get a 50% discount</p>
+            <p>Best Newsletter 🙀</p>
             <Dialog>
               <DialogTrigger asChild>
                 <p className="text-primary ml-1.5 underline cursor-pointer">
-                  First 50 (17 left) people
+                  Sign up for my newsletter
                 </p>
               </DialogTrigger>
               <DialogContent className="rounded-lg sm:max-w-[425px] ">
                 <DialogHeader>
-                  <DialogTitle>50% discount</DialogTitle>
+                  <DialogTitle>Sign up for the newsletter</DialogTitle>
                   <DialogDescription>
-                    Enter your email to get 50% discount code in your inbox 💰
+                    Get Updates when i ship a New Product or Feature. 🙂
                   </DialogDescription>
                 </DialogHeader>
 
@@ -84,7 +84,7 @@ export function AlertDemo() {
                   />
                   <DialogFooter>
                     <Button type="submit" className="mt-4">
-                      Get The discount
+                      Sign Up
                     </Button>
                   </DialogFooter>
                 </form>

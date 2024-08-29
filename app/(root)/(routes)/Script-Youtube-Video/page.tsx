@@ -18,6 +18,7 @@ import {
   FaFileAlt,
   FaArrowLeft
 } from 'react-icons/fa'
+import { useRouter } from 'next/navigation'
 
 interface TitleData {
   title: string
@@ -41,6 +42,25 @@ const TranscriptPage = () => {
   const [isNicheDialogOpen, setIsNicheDialogOpen] = useState(false)
   const [isSavingNiche, setIsSavingNiche] = useState(false)
   const [isLoadingNiche, setIsLoadingNiche] = useState(false)
+  const [hasPurchase, setHasPurchase] = useState(false)
+  const [freeScriptsGenerated, setFreeScriptsGenerated] = useState(0)
+  const router = useRouter()
+
+  useEffect(() => {
+    fetchUserStatus()
+  }, [])
+
+  const fetchUserStatus = async () => {
+    try {
+      const response = await fetch('/api/user-status')
+      const data = await response.json()
+      setHasPurchase(data.hasPurchase)
+      setFreeScriptsGenerated(data.freeScriptsGenerated)
+    } catch (error) {
+      console.error('Error fetching user status:', error)
+      toast.error('Failed to fetch user status')
+    }
+  }
 
   const handleGenerateIdeas = async () => {
     if (!niche.trim() || isGeneratingIdeas) return
@@ -135,8 +155,23 @@ const TranscriptPage = () => {
           outline: selectedTitle.outline
         })
       })
+
+      if (response.status === 402) {
+        toast.error(
+          'You have reached the limit of free scripts. Please purchase to continue.',
+          {
+            id: 'generateScript'
+          }
+        )
+        handleCheckout()
+        return
+      }
+
       const data = await response.json()
       setSelectedTitle({ ...selectedTitle, script: data.script })
+      if (!hasPurchase) {
+        setFreeScriptsGenerated((prev) => prev + 1)
+      }
       toast.success('Full script generated successfully!', {
         id: 'generateScript'
       })
@@ -147,6 +182,22 @@ const TranscriptPage = () => {
       })
     } finally {
       setIsGeneratingScript(false)
+    }
+  }
+
+  const handleCheckout = async () => {
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
+      const data = await response.json()
+      if (data.url) {
+        router.push(data.url)
+      }
+    } catch (error) {
+      console.error('Error during checkout:', error)
+      toast.error('Failed to initiate checkout. Please try again.')
     }
   }
 
@@ -482,6 +533,14 @@ const TranscriptPage = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {!hasPurchase && (
+        <div className="mt-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
+          <p className="font-bold">Free Trial</p>
+          <p>You have used {freeScriptsGenerated} / 2 free scripts.</p>
+          <p>Purchase to unlock unlimited scripts.</p>
+        </div>
+      )}
     </div>
   )
 }

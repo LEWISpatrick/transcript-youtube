@@ -12,7 +12,7 @@ export const tiers = [
   {
     name: 'Video Script Generator',
     priceBefore: '$9.99/Month',
-    price: '20',
+    price: '4.99',
     features: [
       'Generate Unlimited Scripts 📝',
       'Save Unlimited Scripts 💾',
