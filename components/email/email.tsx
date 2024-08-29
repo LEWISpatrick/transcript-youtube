@@ -19,7 +19,7 @@ const baseUrl = process.env.VERCEL_URL
 export const RepoEmail = () => (
   <Html>
     <Head />
-    <Preview>Your 50% discount code</Preview>
+    <Preview>Thanks for subscribing to Patrick's Newsletter 🙂</Preview>
     <Body style={main}>
       <Container style={container}>
         <Text style={paragraph}>Hey!!</Text>
@@ -39,9 +39,6 @@ export const RepoEmail = () => (
             href="https://github.com/LEWISpatrick/transcript-youtube"
           >
             Link To Github 👍💻
-          </Button>
-          <Button style={button} href="https://www.script-youtube.today">
-            Link Back to website 🖥️👀
           </Button>
         </Section>
         <Text style={paragraph}>

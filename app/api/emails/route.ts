@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const { data, error } = await resend.emails.send({
       from: 'Patrick <noreply@script-youtube.today>',
       to: [email],
-      subject: 'Patrick 50% discount code',
+      subject: 'Patrick Newsletter SaaS',
       html: render(RepoEmail())
     })
 

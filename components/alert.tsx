@@ -20,9 +20,10 @@ import { Form } from '@/components/ui/form'
 
 export function AlertDemo() {
   const [email, setEmail] = useState('')
-  const handleSubmit = async (e: any) => {
+  const [open, setOpen] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const email = e.target.email.value
     try {
       const response = await fetch('/api/emails', {
         method: 'POST',
@@ -34,8 +35,11 @@ export function AlertDemo() {
       const data = await response.json()
 
       if (data.message) {
-        toast.success(data.message)
+        toast.success(
+          'Check your Spam folder if you don’t see it in your inbox.'
+        )
         setEmail('')
+        setOpen(false) // Close the dialog after successful submission
       } else {
         console.error(data, 'ha')
       }
@@ -54,7 +58,7 @@ export function AlertDemo() {
           </AlertTitle>
           <AlertDescription className="flex">
             <p>Best Newsletter 🙀</p>
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
                 <p className="text-primary ml-1.5 underline cursor-pointer">
                   Sign up for my newsletter
@@ -69,7 +73,7 @@ export function AlertDemo() {
                 </DialogHeader>
 
                 <form onSubmit={handleSubmit}>
-                  <Label htmlFor="name" className="text-right mb-2">
+                  <Label htmlFor="email" className="text-right mb-2">
                     Email
                   </Label>
                   <Input
