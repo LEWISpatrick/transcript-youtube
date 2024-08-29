@@ -24,15 +24,18 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en">
+        {' '}
         <body className={inter.className}>
+          {' '}
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            <ToastProvider />
+            {' '}
             <AlertDemo />
+            <ToastProvider />
             <Navbar />
             {children}
           </ThemeProvider>
