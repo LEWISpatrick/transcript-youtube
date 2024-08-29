@@ -14,7 +14,7 @@ export const Logo = () => {
         ></Image>
       </div>
       <span className="text-xl group-hover:translate-x-0.5 transition-all duration-300">
-        Script-youtube
+        script-youtube{' '}
       </span>
     </div>
   )

@@ -23,23 +23,31 @@ export const RepoEmail = () => (
     <Body style={main}>
       <Container style={container}>
         <Text style={paragraph}>Hey!!</Text>
-        <Text style={paragraph}>Your 50% discount code is: 1234567890</Text>
+        <Text style={paragraph}>Thanks for subscribing to my newsletter</Text>
         <Text style={paragraph}>
-          Enjoy Writing your next Video Script with it!
+          I will send you the latest news and updates about my Script-youtube or
+          any other projects.
+          <br />
+          <br />
+          If you have any suggestions or feedback, please check out the github
+          repository.
         </Text>
-        <Text style={paragraph}>Use it before 31/12/2025</Text>
+        <Text style={paragraph}></Text>
         <Section style={btnContainer}>
           <Button
             style={button}
-            href="https://github.com/NizarAbiZaher/nizzy-starter"
+            href="https://github.com/LEWISpatrick/transcript-youtube"
           >
+            Link To Github 👍💻
+          </Button>
+          <Button style={button} href="https://www.script-youtube.today">
             Link Back to website 🖥️👀
           </Button>
         </Section>
         <Text style={paragraph}>
           Best,
           <br />
-          Nizzy
+          Patrick Henry{' '}
         </Text>
         <Hr style={hr} />
         <Text style={footer}>
@@ -70,7 +78,10 @@ const logo = {
 const paragraph = {
   fontSize: '16px',
   lineHeight: '26px',
-  color: 'black'
+  color: 'black',
+  marginBottom: '10px',
+  marginTop: '10px',
+  fontWeight: 'bold'
 }
 
 const btnContainer = {
@@ -85,7 +96,8 @@ const button = {
   textDecoration: 'none',
   textAlign: 'center' as const,
   display: 'block',
-  padding: '12px'
+  padding: '12px',
+  marginBottom: '10px'
 }
 
 const hr = {
