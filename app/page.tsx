@@ -1,7 +1,6 @@
-
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
-import { Language } from '@/components/languages'
+import { Languages } from '@/components/languages'
 import { PricingCard } from '@/components/pricing-card'
 import { Testimonials } from '@/components/testimonials'
 
@@ -10,7 +9,7 @@ export default function Home() {
     <>
       <main className="w-full max-w-6xl px-6 space-y-40">
         <Header />
-        <Language />
+        <Languages />
         <PricingCard />
         <Testimonials />
       </main>

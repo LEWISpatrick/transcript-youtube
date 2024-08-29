@@ -10,7 +10,7 @@ export const Footer = () => {
             <Logo />
           </Link>
           <span className="text-sm">
-            &copy; 2024 YourCompany. All rights reserved.
+            &copy; 2024 Script-youtube. All rights reserved.
           </span>
         </div>
       </div>

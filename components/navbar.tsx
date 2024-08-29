@@ -7,8 +7,8 @@ import { Logo } from '@/components/logo'
 
 export const navPages = [
   {
-    title: 'Transcript-Youtube-Video',
-    link: '/yt-transcript'
+    title: 'Script-Youtube',
+    link: '/Script-Youtube-Video'
   }
 ]
 

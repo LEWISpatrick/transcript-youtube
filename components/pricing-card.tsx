@@ -10,38 +10,14 @@ import { useRouter } from 'next/navigation'
 // Update Tiers Here
 export const tiers = [
   {
-    name: 'Your Competitor Name',
-    price: '18.99',
+    name: 'Video Script Generator',
+    priceBefore: '$9.99/Month',
+    price: '20',
     features: [
-      'Feature 1',
-      'Feature 2',
-      'Feature 3',
-      'Feature 4',
-      'Feature 5',
-      'Feature 6',
-      'Feature 7',
-      'Feature 8',
-      'Feature 9',
-      'Feature 10'
-    ],
-    cta: 'Get Started',
-    yourProduct: false
-  },
-  {
-    name: 'Your Product Name',
-    priceBefore: '$19.99',
-    price: '8.99',
-    features: [
-      'Feature 1',
-      'Feature 2',
-      'Feature 3',
-      'Feature 4',
-      'Feature 5',
-      'Feature 6',
-      'Feature 7',
-      'Feature 8',
-      'Feature 9',
-      'Feature 10'
+      'Generate Unlimited Scripts 📝',
+      'Save Unlimited Scripts 💾',
+      'Save Unlimited Outlines 📚',
+      'Save Unlimited Niches 💨'
     ],
     cta: 'Get Started',
     yourProduct: true
@@ -52,7 +28,7 @@ export const PricingCard = () => {
   const [isLoading, setIsLoading] = useState(false)
   const session = useCurrentUser()
 
-  const router = useRouter();
+  const router = useRouter()
 
   const onClick = async () => {
     if (!session) {
@@ -75,12 +51,8 @@ export const PricingCard = () => {
       {/* Title */}
       <div className="mx-auto flex flex-col items-center pb-8">
         <h2 className="pb-4 text-4xl font-extrabold text-foreground">
-          Pricing
+          🔥 Pricing 🔥
         </h2>
-        <p className="text-md opacity-50 max-w-lg text-center">
-          Describe your product / service here that will impress the user & want
-          them to buy the product
-        </p>
       </div>
       {/* Pricing Card Display */}
       <div className="flex flex-col sm:place-items-center md:flex-row items-center justify-center gap-6">
@@ -117,13 +89,13 @@ export const PricingCard = () => {
                     {tier.priceBefore}
                   </span>
                 ) : null}
-                <span className="text-4xl font-bold">${tier.price}</span> /month
+                <span className="text-4xl font-bold">${tier.price}</span>
               </div>
               <ul className="mt-4 space-y-2.5">
                 {tier.features.map((feature, index) => (
                   <li
                     key={index}
-                    className="flex items-center text-foreground/90 gap-2"
+                    className="flex items-center  text-foreground/90 gap-2"
                   >
                     <Check
                       className={`h-6 w-6 rounded-full ${
@@ -146,6 +118,9 @@ export const PricingCard = () => {
                 <Sparkle className="ml-1 h-4 w-4" />
               </Button>
             </div>
+            <span className="underline text-center mt-2">
+              Pay Once Use Forever
+            </span>
           </div>
         ))}
       </div>

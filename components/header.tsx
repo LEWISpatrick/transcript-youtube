@@ -33,7 +33,7 @@ const IframeWithSkeleton = () => {
       )}
       <iframe
         id="youtube-iframe"
-        src="https://www.youtube.com/embed/Q6jDdtbkMIU?si=YtgU89RhYiwt5-U5"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
         title="YouTube Video Player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         className={`w-full max-w-2xl h-auto aspect-video rounded-[6px] ${iframeLoaded ? '' : 'hidden'}`}
@@ -51,7 +51,7 @@ export const Header = () => {
             AI. Edit. Record.
           </h2>
           <p className="mt-4 text-lg text-foreground">
-            Use AI to write your youtube Script 💻👀
+            Use AI to write your youtube Scripts 💻👀
           </p>
           <div className="flex justify-center lg:justify-start items-center mt-4">
             <Link href="/register">

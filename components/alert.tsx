@@ -57,7 +57,7 @@ export function AlertDemo() {
             <Dialog>
               <DialogTrigger asChild>
                 <p className="text-primary ml-1.5 underline cursor-pointer">
-                  Forever
+                  First 50 (17 left) people
                 </p>
               </DialogTrigger>
               <DialogContent className="rounded-lg sm:max-w-[425px] ">

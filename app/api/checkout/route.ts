@@ -11,43 +11,22 @@ export async function POST(req: Request) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    const userSubscription = await db.userSubscription.findUnique({
-      where: {
-        userId: user.user.id
-      }
-    })
-
-    if (userSubscription && userSubscription.stripeCustomerId) {
-      const stripeSession = await stripe.billingPortal.sessions.create({
-        customer: userSubscription.stripeCustomerId,
-        return_url: process.env.APP_URL
-      })
-
-      return new NextResponse(JSON.stringify({ url: stripeSession.url }))
-    }
-
     const stripeSession = await stripe.checkout.sessions.create({
-      success_url: process.env.APP_URL,
+      success_url: `${process.env.APP_URL}/success`,
       cancel_url: process.env.APP_URL,
       payment_method_types: ['card'],
-
-      mode: 'subscription',
+      mode: 'payment',
       billing_address_collection: 'auto',
-      customer_email: user?.user.email!,
-
+      customer_email: user.user.email!,
       line_items: [
         {
           price_data: {
             currency: 'USD',
             product_data: {
-              name: 'Your SaaS Subscription Name',
-              description: 'Saas Subscription Description'
+              name: 'One-Time Payment',
+              description: 'Access to premium features'
             },
-            // cost (change this to the price of your product)
-            unit_amount: 899,
-            recurring: {
-              interval: 'month'
-            }
+            unit_amount: 2000 // $20.00
           },
           quantity: 1
         }
@@ -56,9 +35,10 @@ export async function POST(req: Request) {
         userId: user.user.id
       }
     })
+
     return new NextResponse(JSON.stringify({ url: stripeSession.url }))
   } catch (error) {
-    console.log('[STRIPE_GET]', error)
+    console.error('[STRIPE_ERROR]', error)
     return new NextResponse('Internal Error', { status: 500 })
   }
 }

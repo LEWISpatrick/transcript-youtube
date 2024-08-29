@@ -8,8 +8,8 @@ import { Logo } from '@/components/logo'
 
 const sidebarPages = [
   {
-    title: 'Transcript-youtube-Video',
-    link: '/yt-transcript'
+    title: 'Script-Youtube',
+    link: '/Script-Youtube-Video'
   }
 ]
 
