@@ -27,7 +27,6 @@ export const tiers = [
 export const PricingCard = () => {
   const [isLoading, setIsLoading] = useState(false)
   const session = useCurrentUser()
-
   const router = useRouter()
 
   const onClick = async () => {
@@ -39,13 +38,22 @@ export const PricingCard = () => {
     try {
       setIsLoading(true)
       const response = await axios.post('/api/checkout')
-      window.location.href = response.data.url
+      const data = response.data
+
+      if (data.redirectUrl) {
+        // User already has a purchase, redirect them
+        router.push(data.redirectUrl)
+      } else if (data.url) {
+        // Proceed with Stripe checkout
+        window.location.href = data.url
+      }
     } catch (error) {
-      toast.error('An error occured! Please try again.')
+      toast.error('An error occurred! Please try again.')
     } finally {
       setIsLoading(false)
     }
   }
+
   return (
     <section id="pricing" className="scroll-mt-4">
       {/* Title */}

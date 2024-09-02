@@ -11,6 +11,15 @@ export async function POST(req: Request) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
+    // Check if user already has a purchase
+    const existingPurchase = await db.purchase.findFirst({
+      where: { userId: user.user.id }
+    })
+
+    if (existingPurchase) {
+      return NextResponse.json({ redirectUrl: '/dumb' })
+    }
+
     const stripeSession = await stripe.checkout.sessions.create({
       success_url: `${process.env.APP_URL}/success`,
       cancel_url: process.env.APP_URL,
