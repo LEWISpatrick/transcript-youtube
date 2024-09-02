@@ -15,12 +15,11 @@ import { ResetSchema } from '@/schemas'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
-import { useState, useTransition } from 'react'
-import { reset } from '@/actions/reset'
+import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 
 export default function ResetForm() {
-  const [isPending, startTransition] = useTransition()
+  const [isPending, setIsPending] = useState(false)
 
   const form = useForm<z.infer<typeof ResetSchema>>({
     resolver: zodResolver(ResetSchema),
@@ -30,17 +29,11 @@ export default function ResetForm() {
   })
 
   const onSubmit = (values: z.infer<typeof ResetSchema>) => {
-    startTransition(() => {
-      reset(values).then((data) => {
-        if (data?.error) {
-          toast.error(data.error)
-        }
-        if (data?.success) {
-          toast.success(data.success)
-          form.reset({ email: '' })
-        }
-      })
-    })
+    setIsPending(true)
+    toast.error(
+      'Password reset functionality is still being built. Please log in with Google or GitHub.'
+    )
+    setIsPending(false)
   }
 
   return (

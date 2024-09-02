@@ -45,18 +45,9 @@ export default function Page() {
   })
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    startTransition(() => {
-      login(values).then((data) => {
-        if (data?.error) {
-          toast.error(data.error)
-        }
-        if (data?.success) {
-          toast.success(data.success)
-          form.reset({ email: '', password: '' })
-          window.location.href = '/'
-        }
-      })
-    })
+    toast.error(
+      'Login functionality is still being built. Please log in with Google or GitHub.'
+    )
   }
   return (
     <CardWrapper

@@ -1,67 +1,83 @@
 'use client'
 
 import { CardWrapper } from '@/components/auth/card-wrapper'
-import { newVerification } from '@/actions/new-verification'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from '@/components/ui/form'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
 
-export default function NewVerificationForm() {
-  const [error, setError] = useState<string | undefined>()
-  const [success, setSuccess] = useState<string | undefined>()
-  const [hasErrorToastShown, setHasErrorToastShown] = useState<boolean>(false)
+const NewPasswordSchema = z.object({
+  password: z.string().min(6, {
+    message: 'Password must be at least 6 characters long'
+  })
+})
 
+export default function NewPasswordForm() {
+  const [isPending, setIsPending] = useState(false)
+  const router = useRouter()
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
-  const router = useRouter()
 
-  const onSubmit = useCallback(() => {
-    if (!token) {
-      toast.error('No token provided')
-      return
+  const form = useForm<z.infer<typeof NewPasswordSchema>>({
+    resolver: zodResolver(NewPasswordSchema),
+    defaultValues: {
+      password: ''
     }
-    newVerification(token)
-      .then((data) => {
-        if (data?.error) {
-          setTimeout(() => {
-            setError(data.error)
-          }, 500)
-        } else if (data?.success) {
-          toast.success(data.success)
-          setTimeout(() => {
-            router.push('/login')
-          }, 100)
-        }
-      })
-      .catch(() => {
-        const errorMessage = 'Something went wrong'
-        setError(errorMessage)
-      })
-  }, [token, router])
+  })
 
-  useEffect(() => {
-    onSubmit()
-  }, [onSubmit])
-
-  useEffect(() => {
-    if (error && !hasErrorToastShown) {
-      const timer = setTimeout(() => {
-        toast.error(error)
-        setHasErrorToastShown(true)
-      }, 100)
-      return () => clearTimeout(timer) // Cleanup the timeout if component unmounts
-    }
-  }, [error, hasErrorToastShown])
+  const onSubmit = (values: z.infer<typeof NewPasswordSchema>) => {
+    setIsPending(true)
+    toast.error(
+      'Password reset functionality is still being built. Please use the "Forgot password" option on the login page.'
+    )
+    setIsPending(false)
+  }
 
   return (
     <CardWrapper
-      headerTitle="Verify your email"
+      headerTitle="Reset your password"
       backButtonLabel="Back to Login"
       backButtonHref="/login"
     >
-      <div className="flex items-center w-full justify-center">
-        {!success && !error && <p>Verifying...</p>}
-      </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="space-y-4">
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>New Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="••••••••"
+                      type="password"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button disabled={isPending} type="submit" className="w-full">
+            Reset password
+          </Button>
+        </form>
+      </Form>
     </CardWrapper>
   )
 }
