@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    const { niche } = await req.json()
+    const { niche, story } = await req.json()
 
     // Check if user has any purchases
     const hasPurchase = await db.purchase.findFirst({
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
         },
         {
           role: 'user',
-          content: `Generate 10 catchy and SEO-friendly YouTube video titles for the ${niche} niche. Separate each title with a newline.`
+          content: `Generate 10 catchy and SEO-friendly YouTube video titles for the ${niche} niche. ${story ? `The video should revolve around this story: ${story}` : ''} Separate each title with a newline.`
         }
       ]
     })
