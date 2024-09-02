@@ -80,9 +80,22 @@ const TranscriptPage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ niche })
       })
+
+      if (response.status === 402) {
+        toast.error(
+          'You have reached the limit of free scripts. Please purchase to continue.',
+          { id: 'generateIdeas' }
+        )
+        handleCheckout()
+        return
+      }
+
       const data = await response.json()
       setTitleData(data.titles.map((title: string) => ({ title, outline: '' })))
       setSelectedTitle(null)
+      if (!hasPurchase) {
+        setFreeScriptsGenerated((prev) => prev + 1)
+      }
       toast.success('Video ideas generated successfully!', {
         id: 'generateIdeas'
       })
@@ -156,22 +169,8 @@ const TranscriptPage = () => {
         })
       })
 
-      if (response.status === 402) {
-        toast.error(
-          'You have reached the limit of free scripts. Please purchase to continue.',
-          {
-            id: 'generateScript'
-          }
-        )
-        handleCheckout()
-        return
-      }
-
       const data = await response.json()
       setSelectedTitle({ ...selectedTitle, script: data.script })
-      if (!hasPurchase) {
-        setFreeScriptsGenerated((prev) => prev + 1)
-      }
       toast.success('Full script generated successfully!', {
         id: 'generateScript'
       })
@@ -537,7 +536,7 @@ const TranscriptPage = () => {
       {!hasPurchase && (
         <div className="mt-4 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
           <p className="font-bold">Free Trial</p>
-          <p>You have used {freeScriptsGenerated} / 2 free scripts.</p>
+          <p>You have used {freeScriptsGenerated} out of 2 free scripts.</p>
           <p>Purchase to unlock unlimited scripts.</p>
         </div>
       )}

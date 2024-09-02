@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     })
 
     if (!hasPurchase) {
-      // Check and increment freeScriptsGenerated if user has no purchases
+      // Check if the user has reached the free script limit
       const userData = await db.user.findUnique({
         where: { id: user.user.id },
         select: { freeScriptsGenerated: true }
@@ -35,11 +35,6 @@ export async function POST(req: Request) {
           { status: 402 }
         )
       }
-
-      await db.user.update({
-        where: { id: user.user.id },
-        data: { freeScriptsGenerated: { increment: 1 } }
-      })
     }
 
     const completion = await openai.chat.completions.create({
