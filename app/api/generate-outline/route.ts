@@ -7,7 +7,7 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-    const { title } = await req.json()
+    const { title, story } = await req.json()
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         },
         {
           role: 'user',
-          content: `Generate a basic outline for a YouTube video with the title: "${title}". Provide a structure with main points and sub-points.`
+          content: `Generate a basic outline for a YouTube video with the title: "${title}". ${story ? `The video should incorporate this story: ${story}` : ''} Provide a structure with main points and sub-points.`
         }
       ]
     })

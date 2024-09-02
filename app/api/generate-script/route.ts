@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    const { title, outline } = await req.json()
+    const { title, outline, story } = await req.json()
 
     // Check if user has any purchases
     const hasPurchase = await db.purchase.findFirst({
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
         },
         {
           role: 'user',
-          content: `Generate a full script for a YouTube video with the title: "${title}" and the following outline:\n\n${outline}\n\nProvide a complete script with an introduction, main content following the outline, and a conclusion.`
+          content: `Generate a full script for a YouTube video with the title: "${title}" and the following outline:\n\n${outline}\n\n${story ? `Incorporate this story into the script: ${story}\n\n` : ''}Provide a complete script with an introduction, main content following the outline, and a conclusion.`
         }
       ]
     })

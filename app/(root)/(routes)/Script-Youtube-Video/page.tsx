@@ -146,7 +146,7 @@ const TranscriptPage = () => {
       const response = await fetch('/api/generate-outline', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: selectedTitle.title })
+        body: JSON.stringify({ title: selectedTitle.title, story })
       })
       const data = await response.json()
       setSelectedTitle({ ...selectedTitle, outline: data.outline })
@@ -177,7 +177,8 @@ const TranscriptPage = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: selectedTitle.title,
-          outline: selectedTitle.outline
+          outline: selectedTitle.outline,
+          story
         })
       })
 
