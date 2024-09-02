@@ -66,6 +66,7 @@ const TranscriptPage = () => {
       setHasPurchase(data.hasPurchase)
       setFreeScriptsGenerated(data.freeScriptsGenerated)
     } catch (error) {
+      0
       console.error('Error fetching user status:', error)
       toast.error('Failed to fetch user status')
     }
