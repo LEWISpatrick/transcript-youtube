@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useState, useEffect } from 'react'
 
 const IframeWithSkeleton = () => {
   const [iframeLoaded, setIframeLoaded] = useState(false)
@@ -42,32 +42,52 @@ const IframeWithSkeleton = () => {
   )
 }
 
+const CheckItem = ({ text }: { text: string }) => (
+  <div className="flex items-center space-x-2 py-1">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      className="w-4 h-4 text-primary flex-shrink-0"
+    >
+      <path
+        fillRule="evenodd"
+        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+        clipRule="evenodd"
+      />
+    </svg>
+    <span className="text-lg text-muted-foreground">{text}</span>
+  </div>
+)
+
 export const Header = () => {
   return (
-    <div className="scroll-mb-80 ">
-      <div className="space-y-20 mt-32">
-        <div className="mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="flex flex-col justify-center text-center lg:text-left ">
-            <h2 className="text-7xl font-extrabold sm:text-5xl ">
-              AI. Edit. Record.
-            </h2>
-            <p className="mt-4 text-lg text-foreground">
-              Use AI to write your youtube Scripts 💻👀
-            </p>
-            <div className="flex justify-center lg:justify-start items-center mt-4">
-              <Link href="/register">
-                <Button className="gap-2">
-                  <Sparkles className="h-5 w-5" />
-                  <span>Get Started</span>
-                </Button>
-              </Link>
-            </div>{' '}
-          </div>
-          <div className="flex items-center justify-center rounded-lg overflow-hidden">
-            <IframeWithSkeleton />
-          </div>
+    <div className="flex items-center justify-center min-h-[calc(100vh-8rem)] bg-background">
+      {' '}
+      {/* Reduced height */}
+      <div className="text-center max-w-3xl mx-auto px-4">
+        <h1 className="text-6xl font-bold mb-4 text-foreground">
+          {' '}
+          {/* Reduced font size */}
+          AI. Edit. Record.
+        </h1>
+        <p className="text-xl mb-6 text-muted-foreground">
+          Use AI to help you write your YouTube scripts
+        </p>
+        <div className="mb-8 inline-block text-left">
+          <CheckItem text="Write engaging scripts with AI" />
+          <CheckItem text="Access YouTube videos library" />
+          <CheckItem text="Save hours on script writing" />
         </div>
-      </div>{' '}
+        <div>
+          <Link href="/register">
+            <Button size="lg" className="text-xl px-8 py-3 rounded-md">
+              <Sparkles className="h-7 w-7 mr-2" />
+              Get Started
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

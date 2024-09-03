@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Script-youtube',
-  description: 'Use AI to write your youtube Script 💻👀 - 🫢'
+  description: 'Use AI to help you write your youtube Scripts 💻👀 - 🫢'
 }
 
 export default async function RootLayout({

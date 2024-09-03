@@ -49,6 +49,7 @@ const TranscriptPage = () => {
   const [isLoadingNiche, setIsLoadingNiche] = useState(false)
   const [hasPurchase, setHasPurchase] = useState(false)
   const [freeScriptsGenerated, setFreeScriptsGenerated] = useState(0)
+  const [activeInput, setActiveInput] = useState<'niche' | 'story'>('niche')
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -283,10 +284,14 @@ const TranscriptPage = () => {
   }
 
   const handleNicheClick = (clickedNiche: string) => {
-    setNiche(clickedNiche)
+    if (activeInput === 'niche') {
+      setNiche(clickedNiche)
+    } else if (activeInput === 'story') {
+      setStory(clickedNiche)
+    }
     setIsNicheDialogOpen(false)
     setIsLoadingNiche(false)
-    toast.success('Niche loaded successfully!', { id: 'loadNiche' })
+    toast.success('Content loaded successfully!', { id: 'loadNiche' })
   }
 
   const handleOutlineChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -380,6 +385,7 @@ const TranscriptPage = () => {
                 <textarea
                   value={niche}
                   onChange={(e) => setNiche(e.target.value)}
+                  onFocus={() => setActiveInput('niche')}
                   className="w-full px-4 py-3 text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 mb-4"
                   rows={4}
                   placeholder="Enter your video niche idea here..."
@@ -391,6 +397,7 @@ const TranscriptPage = () => {
                   <textarea
                     value={story}
                     onChange={(e) => setStory(e.target.value)}
+                    onFocus={() => setActiveInput('story')}
                     placeholder="Enter your video story (optional)..."
                     className="w-full px-4 py-3 text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     rows={5}
@@ -429,7 +436,7 @@ const TranscriptPage = () => {
                     className="px-6 py-2 text-sm"
                   >
                     <FaLightbulb className="mr-2" />
-                    {isGeneratingIdeas ? 'Generating...' : 'Generate Ideas'}
+                    {isGeneratingIdeas ? 'Generating...' : 'Generate Titles'}
                   </Button>
                 </div>
               </div>
@@ -535,7 +542,7 @@ const TranscriptPage = () => {
           <Dialog open={isNicheDialogOpen} onOpenChange={setIsNicheDialogOpen}>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Saved Niches</DialogTitle>
+                <DialogTitle>Saved Content</DialogTitle>
               </DialogHeader>
               <div className="mt-4">
                 {savedNiches.length > 0 ? (
@@ -560,7 +567,7 @@ const TranscriptPage = () => {
                     ))}
                   </ul>
                 ) : (
-                  <p>No saved niches found.</p>
+                  <p>No saved content found.</p>
                 )}
               </div>
             </DialogContent>

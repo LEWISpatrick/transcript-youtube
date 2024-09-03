@@ -10,8 +10,8 @@
 
   :root {
     /* Adjust these to change the theme's color */
-    --primary: 234 88% 74%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 0 100% 50%;
+    --primary-foreground: 0 0% 100%;
 
     /* Adjust these to change the chart's colors */
     --chart-1: 208 87% 53%;

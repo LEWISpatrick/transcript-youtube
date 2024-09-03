@@ -10,8 +10,8 @@ export default function Home() {
       <main className="w-full max-w-6xl px-6 space-y-40">
         <Header />
         <Languages />
-        <PricingCard />
         <Testimonials />
+        <PricingCard />
       </main>
       <Footer />
     </>
