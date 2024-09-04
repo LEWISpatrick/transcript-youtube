@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const popupMessages = [
   {
     id: 1,
-    message: "Start by clicking on the 'Script Youtube'.",
+    message: "Start by clicking on the 'Script Youtube'🔥.",
     duration: 4000
   }
 ]

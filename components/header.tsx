@@ -62,21 +62,25 @@ const CheckItem = ({ text }: { text: string }) => (
 
 export const Header = () => {
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-8rem)] bg-background">
-      {' '}
-      {/* Reduced height */}
+    <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] bg-background">
       <div className="text-center max-w-3xl mx-auto px-4">
-        <h1 className="text-6xl font-bold mb-4 text-foreground">
-          {' '}
-          {/* Reduced font size */}
-          AI. Edit. Record.
+        <h1 className="text-6xl font-bold mb-4 text-foreground flex flex-col">
+          <span
+            className="underline
+          decoration-4
+          underline-offset-8
+          text-7xl font-extrabold italic mb-2"
+          >
+            Tired
+          </span>
+          Of Script Writing?
         </h1>
         <p className="text-xl mb-6 text-muted-foreground">
           Use AI to help you write your YouTube scripts
         </p>
         <div className="mb-8 inline-block text-left">
           <CheckItem text="Write engaging scripts with AI" />
-          <CheckItem text="Access YouTube videos library" />
+          <CheckItem text="Write 10x better scripts" />
           <CheckItem text="Save hours on script writing" />
         </div>
         <div>

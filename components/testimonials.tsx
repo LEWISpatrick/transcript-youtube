@@ -19,8 +19,10 @@ export const Testimonials = () => {
       {/* Section Title */}
 
       {/* Testimonials Card*/}
-      <div className="w-full max-w-6xl px-4">
+      <div className="w-full max-w-6xl px-4 min-h-[calc(100vh-2rem)]  ">
         <div className="flex flex-col items-center gap-6">
+          <h3 className="text-3xl font-semibold mb-4">Proof That It Works</h3>
+
           {testimonials.map((testimonial, i) => (
             <Card
               key={i}

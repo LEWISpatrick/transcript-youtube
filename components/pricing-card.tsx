@@ -12,7 +12,7 @@ export const tiers = [
   {
     name: 'Video Script Generator',
     priceBefore: '$9.99/Month',
-    price: '4.99',
+    price: '7.99',
     features: [
       'Generate Unlimited Scripts 📝',
       'Save Unlimited Scripts 💾',
@@ -55,7 +55,7 @@ export const PricingCard = () => {
   }
 
   return (
-    <section id="pricing" className="scroll-mt-4">
+    <section id="pricing" className="scroll-mt-4 mb-10">
       {/* Title */}
       <div className="mx-auto flex flex-col items-center pb-8">
         <h2 className="pb-4 text-4xl font-extrabold text-foreground">

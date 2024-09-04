@@ -43,9 +43,9 @@ const IframeWithSkeleton = () => {
 
 export const Languages = () => {
   return (
-    <div className="p-4 mx-auto max-w-screen-sm w-full">
+    <div className="p-4 mx-auto max-w-screen-sm w-full min-h-[calc(100vh-4rem)] ">
       <div className="text-center">
-        <h3 className="text-2xl font-semibold mb-4">See It in Action</h3>
+        <h3 className="text-3xl font-semibold mb-4">See It in Action</h3>
         <IframeWithSkeleton />
       </div>
     </div>
