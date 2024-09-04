@@ -20,6 +20,7 @@ import {
 } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { AnimatedPopup } from '@/components/animatedPopup'
 
 interface TitleData {
   title: string
@@ -30,6 +31,12 @@ interface TitleData {
 interface VideoNiche {
   id: string
   niche: string
+}
+
+interface PopupMessage {
+  id: number
+  message: string
+  duration: number
 }
 
 const TranscriptPage = () => {
@@ -51,6 +58,9 @@ const TranscriptPage = () => {
   const [freeScriptsGenerated, setFreeScriptsGenerated] = useState(0)
   const [activeInput, setActiveInput] = useState<'niche' | 'story'>('niche')
 
+  const [popupMessages, setPopupMessages] = useState<PopupMessage[]>([])
+  const [messageIdCounter, setMessageIdCounter] = useState(0)
+
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/register')
@@ -59,6 +69,27 @@ const TranscriptPage = () => {
       fetchSavedNiches()
     }
   }, [status, router])
+
+  const addPopupMessage = (message: string, duration: number) => {
+    const newMessage = {
+      id: messageIdCounter,
+      message,
+      duration
+    }
+    setPopupMessages((prev) => [...prev, newMessage])
+    setMessageIdCounter((prev) => prev + 1)
+  }
+
+  const handleNicheFocus = () => {
+    addPopupMessage('Start by inputting the niche of your video.', 4000)
+  }
+
+  const handleStoryFocus = () => {
+    addPopupMessage(
+      'Optionally, add the story your video revolves around.',
+      4000
+    )
+  }
 
   const fetchUserStatus = async () => {
     try {
@@ -122,6 +153,8 @@ const TranscriptPage = () => {
       setIsSavingNiche(false)
       setIsLoadingNiche(false)
     }
+
+    addPopupMessage("Click 'Generate Titles' to proceed.", 4000)
   }
 
   const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -133,6 +166,7 @@ const TranscriptPage = () => {
 
   const handleTitleClick = (title: TitleData) => {
     setSelectedTitle(title)
+    addPopupMessage('Select a title to move to the next step.', 4000)
   }
 
   const handleGenerateOutline = async () => {
@@ -162,6 +196,11 @@ const TranscriptPage = () => {
     } finally {
       setIsGeneratingOutline(false)
     }
+
+    addPopupMessage(
+      "Click 'Generate Basic Outline' to create an outline.",
+      4000
+    )
   }
 
   const handleGenerateScript = async () => {
@@ -196,6 +235,11 @@ const TranscriptPage = () => {
     } finally {
       setIsGeneratingScript(false)
     }
+
+    addPopupMessage(
+      "Now, click 'Generate Script' to create the full script.",
+      4000
+    )
   }
 
   const handleCheckout = async () => {
@@ -362,6 +406,11 @@ const TranscriptPage = () => {
       console.error('Error saving full script:', error)
       toast.error('Failed to save full script')
     }
+
+    addPopupMessage(
+      "To save your work, click on your avatar and then the 'Save Scripts' button.",
+      4000
+    )
   }
 
   return (
@@ -372,6 +421,7 @@ const TranscriptPage = () => {
         </div>
       ) : status === 'authenticated' ? (
         <div className="p-4 max-w-3xl mx-auto">
+          <AnimatedPopup messages={popupMessages} />
           <h1 className="text-3xl font-bold text-center mb-6">
             Generate YouTube Video Scripts
           </h1>
@@ -385,7 +435,7 @@ const TranscriptPage = () => {
                 <textarea
                   value={niche}
                   onChange={(e) => setNiche(e.target.value)}
-                  onFocus={() => setActiveInput('niche')}
+                  onFocus={handleNicheFocus}
                   className="w-full px-4 py-3 text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 mb-4"
                   rows={4}
                   placeholder="Enter your video niche idea here..."
@@ -397,7 +447,7 @@ const TranscriptPage = () => {
                   <textarea
                     value={story}
                     onChange={(e) => setStory(e.target.value)}
-                    onFocus={() => setActiveInput('story')}
+                    onFocus={handleStoryFocus}
                     placeholder="Enter your video story (optional)..."
                     className="w-full px-4 py-3 text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     rows={5}
