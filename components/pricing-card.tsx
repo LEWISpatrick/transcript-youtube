@@ -55,7 +55,7 @@ export const PricingCard = () => {
   }
 
   return (
-    <section id="pricing" className="scroll-mt-4 mb-10">
+    <section id="pricing" className="scroll-mt-4 mb-32">
       {/* Title */}
       <div className="mx-auto flex flex-col items-center pb-8">
         <h2 className="pb-4 text-4xl font-extrabold text-foreground">
