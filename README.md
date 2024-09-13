@@ -28,6 +28,16 @@ This project is a web application that uses AI to help users write YouTube scrip
 5. npm run database, to run 'schema.prisma'
 6. Open [http://localhost:3000](http://localhost:3000) in your browser
 
+## GROQ AI Setup
+
+1. Go to [console.groq.com](https://console.groq.com) and create a Free account.
+2. Click on the "Keys" link on the left and create a new key
+3. Copy the key and paste it in the .env file:
+
+```bash
+GROQ_API_KEY="YOUR_API_KEY_GOES_HERE"
+```
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
